@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mark Dorn — Portfolio",
-  description: "Personal portfolio website.",
+  title: {
+    default: "Mark Dorn — Senior Product Designer",
+    template: "%s — Mark Dorn",
+  },
+  description:
+    "Portfolio of Mark Dorn, a Senior Product Designer who simplifies complex problems into intuitive, user-first solutions.",
 };
 
 export default function RootLayout({
@@ -27,7 +33,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
